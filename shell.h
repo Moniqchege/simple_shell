@@ -151,7 +151,7 @@ char *_strchr(char *, char);
 
 /* toem_tokenizer.c */
 char **strtow(char *, char *);
-char **strtow2(char *, char *);
+char **strtow2(char *, char);
 
 /* toem_relloc.c */
 char *_memset(char *, char, unsigned int);
@@ -221,7 +221,7 @@ void free_list(list_t **);
 
 /* toem_lists1.c */
 size_t list_len(const list_t *);
-char **list_to_strings(list_t);
+char **list_to_strings(list_t *);
 size_t print_list(const list_t *);
 list_t *node_starts_with(list_t *, char*, char);
 ssize_t grt_node_index(list_t *, list_t *);

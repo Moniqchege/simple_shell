@@ -20,7 +20,7 @@ int main(int ac, char **av)
 
 	if (ac == 2)
 	{
-		fd = open(av[1], 0_RDONLY);
+		fd = open(av[1], O_RDONLY);
 		if (fd == -1)
 		{
 			if (errno == EACCES)
