@@ -1,4 +1,4 @@
-#include "shell"
+#include "shell.h"
 
 /**
  * hsh - main shell loop
@@ -24,7 +24,7 @@ int hsh(info_t *info, char **av)
 		{
 			set_info(info, av);
 			builtin_ret = find_builtin(info);
-			if (buitin_ret == -1)
+			if (builtin_ret == -1)
 				find_cmd(info);
 		}
 		else if (interactive(info))
@@ -58,23 +58,23 @@ int hsh(info_t *info, char **av)
 int find_builtin(info_t *info)
 {
 	int i, built_in_ret = -1;
-	builtin_table builtinbl[] ={
+	builtin_table builtintbl[] ={
 		{"exit", _myexit},
 		{"env", _myenv},
 		{"help", _myhelp},
 		{"history", _myhistory},
 		{"setenv", _mysetenv},
-		{"unsetenv", _myunsentev},
+		{"unsetenv", _myunsetev},
 		{"cd", _mycd},
 		{"alias", _myalias},
 		{NULL, NULL}
 	};
 
-	for (i = 0; builtinb[i].type; i++)
-		if (_strcmp(info->argv[0], builtin[i].type) == 0)
+	for (i = 0; builtintbl[i].type; i++)
+		if (_strcmp(info->argv[0], builtintbl[i].type) == 0)
 		{
 			info->line_count++;
-			builtin_in_ret = builtinb[i].func(info);
+			built_in_ret = builtintbl[i].func(info);
 			break;
 		}
 	return (built_in_ret);
@@ -99,7 +99,7 @@ void find_cmd(info_t *info)
 		info->linecount_flag = 0;
 	}
 	for (i = 0, k = 0; info->arg[i]; i++)
-		if (!is_delim(info->arg[i], "\t\"))
+		if (!is_delim(info->arg[i], " \t\n"))
 			k++;
 	if (!k)
 		return;
@@ -113,7 +113,7 @@ void find_cmd(info_t *info)
 	else
 	{
 		if ((interactive(info) || _getenv(info, "PATH = ")
-					|| info=>argv[0][0] == '/') && is_cmd(info, info->argv[0]))
+					|| info->argv[0][0] == '/') && is_cmd(info, info->argv[0]))
 			fork_cmd(info);
 		else if (*(info->arg) != '\n')
 		{
@@ -138,7 +138,7 @@ void fork_cmd(info_t *info)
 	if (child_pid ==-1)
 	{
 		/*TODO: PUT ERROR FUNCTION*/
-		perrror("Error:");
+		perror("Error:");
 		return;
 	}
 	if (child_pid == 0)
@@ -156,7 +156,7 @@ void fork_cmd(info_t *info)
 		wait(&(info->status));
 		if (WIFEXITED(info->status))
 		{
-			info->status = WEXITSTATUS(info->);
+			info->status = WEXITSTATUS(info->status);
 			if (info->status == 126)
 				print_error(info, "permission denied\n");
 		}

@@ -74,7 +74,7 @@ ssize_t get_input(info_t *info)
 			j++;
 		}
 
-		i = j + 1; /* increment past nulled ';' */
+		i = j + 1; /* increment past nulled ';'' */
 		if (i >= len) /* reached end of buffer? */
 		{
 			i = len = 0; /* reset position and length */
@@ -144,7 +144,7 @@ int _getline(info_t *info, char **ptr, size_t *length)
 	if (s)
 		_strncat(new_p, buf + i, k - i);
 	else
-		_strncpy(new_p, buf + i, k - 1 + 1);
+		_strncpy(new_p, buf + i, k - i + 1);
 
 	s += k - i;
 	i = k;
