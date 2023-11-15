@@ -39,7 +39,7 @@ char *_strncpy(char *dest, char *src, int n)
  *
  * Return: the concatenated string
  */
-char *_strcat(char *dest, char *src, int n)
+char *_strncat(char *dest, char *src, int n)
 {
 	int i, j;
 	char *s = dest;

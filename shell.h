@@ -109,7 +109,7 @@ typedef struct passinfo
 typedef struct builtin
 {
 	char *type;
-	int (*fun)(info_t *);
+	int (*func)(info_t *);
 } builtin_table;
 
 /* toem_shloop.c */
@@ -132,22 +132,22 @@ int _eputchar(char);
 int _putfd(char c, int fd);
 int _putsfd(char *str, int fd);
 
-/* toem_exits.c */
-char *_strcpy(char *, char *, int);
-char *_strncat(char *, char *, int);
-char *_strchr(char *, char);
-
 /* toem_string.c */
 int _strlen(char *);
-int_strcmp(char *, char *);
+int _strcmp(char *, char *);
 char *starts_with(const char *, const char *);
 char *_strcat(char *, char *);
 
 /* toem_string1.c */
 char *_strcpy(char *, char *);
-char *_strdup(const char *, int);
+char *_strdup(const char *);
 void _puts(char *);
 int _putchar(char);
+
+/* toem_exits.c */
+char *_strncpy(char *, char *, int);
+char *_strncat(char *, char *, int);
+char *_strchr(char *, char);
 
 /* toem_tokenizer.c */
 char **strtow(char *, char *);
@@ -156,7 +156,6 @@ char **strtow2(char *, char *);
 /* toem_relloc.c */
 char *_memset(char *, char, unsigned int);
 void ffree(char **);
-void *realloc(void *, unsigned int, unsigned int);
 void *_realloc(void *, unsigned int, unsigned int);
 
 /* toem_memory.c */
@@ -196,7 +195,14 @@ void free_info(info_t *, int);
 
 /* toem_environ.c */
 char *_getenv(info_t *, const char *);
-int _myenv(info_t *, char *);
+int _myenv(info_t *);
+int _mysetenv(info_t *);
+int _myunsetenv(info_t *);
+int populate_env_list(info_t *);
+
+/* toem_getenv.c */
+char **get_environ(info_t *);
+int _unsetenv(info_t *, char *);
 int _setenv(info_t *, char *, char *);
 
 /* toem_history.c */
@@ -221,7 +227,7 @@ list_t *node_starts_with(list_t *, char*, char);
 ssize_t grt_node_index(list_t *, list_t *);
 
 /* toem_vars.c */
-int is_chain(info *, char *, size_t *);
+int is_chain(info_t *, char *, size_t *);
 void check_chain(info_t *, char *, size_t*, size_t, size_t);
 int replace_alias(info_t *);
 int replace_vars(info_t *);
