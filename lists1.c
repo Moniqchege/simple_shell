@@ -42,6 +42,7 @@ char **list_to_strings(list_t *head)
 		str = malloc(_strlen(node->str) + 1);
 		if (!str)
 		{
+			int j;
 			for (j = 0; j < i; j++)
 				free(strs[j]);
 			free(strs);
@@ -95,7 +96,7 @@ list_t *node_starts_with(list_t *node, char *prefix, char c)
 	while (node)
 	{
 		p = starts_with(node->str, prefix);
-		if (p && ((c == -1) || (*p == c)))
+		if (p && ((c== -1) || (*p == c)))
 			return (node);
 		node = node->next;
 	}
