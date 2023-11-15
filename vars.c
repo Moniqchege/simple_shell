@@ -47,7 +47,7 @@ int is_chain(info_t *info, char *buf, size_t *p)
  * Return: void
  */
 
-void check_chain(info_t *info, char *buf, size_t *P, size_t i, size_t len)
+void check_chain(info_t *info, char *buf, size_t *p, size_t i, size_t len)
 {
 	size_t j = *p;
 
@@ -95,10 +95,10 @@ int replace_vars(info_t *info)
 		if (!_strcmp(info->argv[i], "$$"))
 		{
 			replace_string(&(info->argv[i]),
-						_strdup(convert_number(get pid(), 10, 0)));
+						_strdup(convert_number(getpid(), 10, 0)));
 			continue;
 		}
-		node = node_starts_with(info->, &info->argv[i][1], '=');
+		node = node_starts_with(info->env, &info->argv[i][1], '=');
 		if (node)
 		{
 			replace_string(&(info->argv[i]),

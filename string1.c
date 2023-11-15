@@ -42,7 +42,7 @@ char *_strdup(const char *str)
 	ret = malloc(sizeof(char) * (length + 1));
 	if (!ret)
 		return (NULL);
-	for (length++; lenth--;)
+	for (length++; length--;)
 		ret[length] = *--str;
 	return (ret);
 }
